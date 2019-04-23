@@ -1,0 +1,93 @@
+<!-- EDIT BOOKMARK FORM -->
+<ng-container *ngIf="bookmarkForm; else showList">
+  <form [formGroup]="bookmarkForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="bookmark-card">
+      <mat-card-header>
+        <mat-card-title>Edit bookmark</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Link" formControlName="link">
+              <mat-error *ngIf="bookmarkForm.controls['link'].hasError('required')">
+                Link is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Description" formControlName="description">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Tags (comma separated)" formControlName="tags">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-slide-toggle
+              class="example-margin"
+              formControlName="visibility">
+              Visible
+            </mat-slide-toggle>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!bookmarkForm.valid">Update</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</ng-container>
+
+<!-- LIST OF BOOKMARKS -->
+<ng-template #showList>
+  <div class="grid-container">
+    <h1 class="mat-h1">Manage your bookmarks</h1>
+
+    <ng-container *ngIf="(bookmarks.bookmarks$ | async).length; else noBookmarks">
+      <!-- SEARCH BOX -->
+      <div class="search-container">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Search bookmarks" #search>
+        </mat-form-field>
+      </div>
+
+      <!-- BOOKMARK LIST -->
+      <mat-grid-list cols="1" rowHeight="150px">
+        <mat-grid-tile *ngFor="let bookmark of bookmarks.bookmarks$ | async | filterBookmarks:search.value:false">
+          <mat-card class="bookmark-card-list">
+            <mat-card-header>
+              <mat-card-title>
+                <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" xPosition="before">
+                  <button mat-menu-item (click)="onEdit(bookmark)">Edit</button>
+                  <button mat-menu-item (click)="onRemove(bookmark)">Remove</button>
+                </mat-menu>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="dashboard-card-content">
+              <div><a href="{{bookmark.link}}" target="_blank">{{bookmark.link}}</a></div>
+              <br>
+              <div><b>Description: </b>{{bookmark.description}}</div>
+              <div><b>Tags: </b>{{bookmark.tags}}</div>
+              <div><b>Visible: </b>{{bookmark.visibility === true ? 'Yes' : 'No'}}</div>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </ng-container>
+    <ng-template #noBookmarks>
+      <p>You have no bookmarks! Click <a routerLink="/add">here</a> to add your first bookmark</p>
+    </ng-template>
+  </div>
+</ng-template>

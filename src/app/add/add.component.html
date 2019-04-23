@@ -1,0 +1,45 @@
+<form [formGroup]="bookmarkForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="bookmark-card">
+    <mat-card-header>
+      <mat-card-title>Add new bookmark</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Link" formControlName="link">
+            <mat-error *ngIf="bookmarkForm.controls['link'].hasError('required')">
+              Link is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Description" formControlName="description">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Tags (comma separated)" formControlName="tags">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-slide-toggle
+            class="example-margin"
+            formControlName="visibility">
+            Visible
+          </mat-slide-toggle>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!bookmarkForm.valid">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

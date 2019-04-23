@@ -1,0 +1,30 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Your bookmarks</h1>
+
+  <ng-container *ngIf="(bookmarks.bookmarks$ | async).length; else noBookmarks">
+
+    <!-- SEARCH BOX -->
+    <div class="search-container">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Search bookmarks" #search>
+      </mat-form-field>
+    </div>
+
+    <!-- BOOKMARK LIST -->
+    <mat-grid-list cols="1" rowHeight="120px">
+      <mat-grid-tile *ngFor="let bookmark of bookmarks.bookmarks$ | async | filterBookmarks: search.value">
+        <mat-card class="bookmark-card">
+          <mat-card-content class="dashboard-card-content">
+            <div><a href="{{bookmark.link}}" target="_blank">{{bookmark.link}}</a></div>
+            <br>
+            <div><b>Description: </b>{{bookmark.description}}</div>
+            <div><b>Tags: </b>{{bookmark.tags}}</div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </ng-container>
+  <ng-template #noBookmarks>
+    <p>You have no bookmarks! Click <a routerLink="/add">here</a> to add your first bookmark</p>
+  </ng-template>
+</div>

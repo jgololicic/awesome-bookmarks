@@ -1,0 +1,28 @@
+.grid-container {
+  margin: 20px;
+}
+
+.bookmark-card {
+  min-width: 120px;
+  margin: 20px;
+}
+
+.bookmark-card-list {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 20px;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
