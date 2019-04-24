@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 import {IBookmark} from '../definitions/bookmark.interface';
@@ -15,7 +15,7 @@ export class BookmarkLocalStorageService implements BookmarkService {
   private bookmarksSubject: BehaviorSubject<IBookmark[]>;
   private readonly LOCAL_STORAGE_KEY = 'our_very_unique_key';
 
-  public constructor(private utilsService: UtilsService) {
+  public constructor(private utilsService: UtilsService, @Inject('LOCAL_STORAGE') localStorage) {
     if (!localStorage) {
       throw new Error('Local storage not supported');
     }

@@ -7,5 +7,6 @@ import {BookmarkService} from '../core/definitions/bookmark-service.interface';
   styleUrls: ['./bookmarks.component.css']
 })
 export class BookmarksComponent {
-  constructor(public bookmarks: BookmarkService) {}
+  constructor(public bookmarks: BookmarkService) {
+  }
 }

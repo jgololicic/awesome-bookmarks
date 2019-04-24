@@ -28,22 +28,26 @@ import {UtilsService} from './core/services/utils.service';
     CoreModule,
     SharedModule,
     AppRoutingModule,
-    InMemoryWebApiModule.forRoot(ApiInMemoryService)
+    InMemoryWebApiModule.forRoot(ApiInMemoryService, {delay: 0})
   ],
   providers: [
     {
       provide: BookmarkService,
-      useFactory: (http: HttpClient, utils: UtilsService) => {
+      useFactory: (http: HttpClient, utils: UtilsService, localStorage: 'LOCAL_STORAGE') => {
         // Decide which storage to use based on some logic
         const useOffline = false;
 
         if (useOffline) {
-          return new BookmarkLocalStorageService(utils);
+          return new BookmarkLocalStorageService(utils, localStorage);
         } else {
           return new BookmarkRemoteStorageService(http, utils);
         }
       },
-      deps: [HttpClient, UtilsService]
+      deps: [HttpClient, UtilsService, 'LOCAL_STORAGE']
+    },
+    {
+      provide: 'LOCAL_STORAGE',
+      useValue: localStorage
     }
   ],
   bootstrap: [AppComponent]

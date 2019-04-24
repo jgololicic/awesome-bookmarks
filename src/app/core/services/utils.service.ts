@@ -17,7 +17,6 @@ export class UtilsService {
         if (index === -1) {
           newState = [...oldState, bookmark];
         } else {
-          console.log(index);
           newState = [
             ...oldState.slice(0, index),
             bookmark,

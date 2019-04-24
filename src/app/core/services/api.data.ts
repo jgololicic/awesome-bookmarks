@@ -3,7 +3,7 @@ export const bookmarks = [
     id: '71d85b2b-b10a-4094-9e63-1201ed4741a8',
     link: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice',
     description: 'Learn finally how Array​.prototype​.slice works!!!',
-    tags: 'javascript, mdn, array, slice',
+    tags: 'mdn, array, slice',
     visibility: true
   },
   {

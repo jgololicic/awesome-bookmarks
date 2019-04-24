@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BookmarkService} from '../core/definitions/bookmark-service.interface';
 import {IBookmark} from '../core/definitions/bookmark.interface';
 import {Router} from '@angular/router';
@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class AddComponent {
 
-  public bookmarkForm = this.fb.group({
+  public bookmarkForm: FormGroup = this.fb.group({
     link: [null, Validators.required],
     description: null,
     tags: null,
@@ -24,8 +24,10 @@ export class AddComponent {
   }
 
   public onSubmit(): void {
-    const bookmark: IBookmark = this.bookmarkForm.getRawValue();
-    this.bookmarks.save(bookmark);
-    this.router.navigateByUrl('/');
+    if (this.bookmarkForm.valid) {
+      const bookmark: IBookmark = this.bookmarkForm.getRawValue();
+      this.bookmarks.save(bookmark);
+      this.router.navigateByUrl('/');
+    }
   }
 }

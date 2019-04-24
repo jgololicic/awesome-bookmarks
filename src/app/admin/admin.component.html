@@ -70,8 +70,8 @@
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu" xPosition="before">
-                  <button mat-menu-item (click)="onEdit(bookmark)">Edit</button>
-                  <button mat-menu-item (click)="onRemove(bookmark)">Remove</button>
+                  <button class="editButton" mat-menu-item (click)="onEdit(bookmark)">Edit</button>
+                  <button class="removeButton" mat-menu-item (click)="onRemove(bookmark)">Remove</button>
                 </mat-menu>
               </mat-card-title>
             </mat-card-header>

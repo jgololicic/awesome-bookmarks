@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {FilterBookmarksPipe} from './pipes/filter-bookmarks.pipe';
 
 @NgModule({
@@ -11,4 +11,5 @@ import {FilterBookmarksPipe} from './pipes/filter-bookmarks.pipe';
     FilterBookmarksPipe
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}
